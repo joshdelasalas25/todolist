@@ -5,16 +5,15 @@ const classNames = {
   TODO_DELETE: 'todo-delete',
 }
 
-const list = document.getElementById('todo-list')
-const itemCountSpan = document.getElementById('item-count')
-const uncheckedCountSpan = document.getElementById('unchecked-count')
+const list = document.getElementById('todo-list');
+const itemCountSpan = document.getElementById('item-count');
+const uncheckedCountSpan = document.getElementById('unchecked-count');
 document.querySelector('ul').addEventListener('click', handleClick);
-
-
+let checked = document.getElementsByClassName('done');
 
 function newTodo() {
   var text = prompt('Enter Todo activity', "");
-  (text !== '') ? addTodo(text) : alert('Please enter an activity to do. Try again.');
+  (!text == '') ? addTodo(text) : alert('Please enter an activity to do. Try again.');
 }
 
 //Adds the todo item to the list
@@ -23,7 +22,7 @@ function addTodo(text) {
   let todoItem = document.createElement('li');
   todoItem.innerHTML = `
       <div class ="${classNames.TODO_ITEM}">
-        <button class="${classNames.TODO_CHECKBOX}"  name='checkButton'><i class="fa fa-check-square"></i></button>
+        <button class="${classNames.TODO_CHECKBOX}"  name='checkButton'><i class="fa fa-circle-o" id="checkbox"></i></button>
         <span type="text" class="${classNames.TODO_TEXT}">${text}</span>
         <button class="${classNames.TODO_DELETE}" name='deleteButton' ><i class="fa fa-trash"></i></button>
         </div>    
@@ -47,12 +46,14 @@ function handleClick(e) {
 updateItemsCount(list);
 }
 
-
+//checkes the todo item
 function checkTodo(e) {
   let item = e.target.parentNode;
-  item.classList.toggle('done');
+  let done = item.classList.toggle('done');
+  item.querySelector('#checkbox').className = (!done) ? "fa fa-circle-o" : "fa fa-check-circle-o";  
 }
 
+//deletes the item
 function deleteTodo(e) {
   let item = e.target.parentNode;
   item.closest('li').remove();   
@@ -64,9 +65,9 @@ function deleteTodo(e) {
 function updateItemsCount(todoList){
   
   let listItemsCount = todoList.getElementsByTagName('li').length;
-  let checked = document.getElementsByClassName('done').length;
+  let numberOfChecks = checked.length;
  
   itemCountSpan.textContent = listItemsCount;
-  uncheckedCountSpan.textContent = (checked) ? listItemsCount - checked : listItemsCount;
+  uncheckedCountSpan.textContent = (checked) ? listItemsCount - numberOfChecks : listItemsCount;
 }
   
