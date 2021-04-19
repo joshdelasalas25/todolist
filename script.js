@@ -22,7 +22,7 @@ function addTodo(text) {
   let todoItem = document.createElement('li');
   todoItem.innerHTML = `
       <div class ="${classNames.TODO_ITEM}">
-        <button class="${classNames.TODO_CHECKBOX}"  name='checkButton'><i class="fa fa-square" id="checkbox"></i></button>
+        <button class="${classNames.TODO_CHECKBOX}"  name='checkButton'><i class="fa fa-square-o" id="checkbox"></i></button>
         <span type="text" class="${classNames.TODO_TEXT}">${text}</span>
         <button class="${classNames.TODO_DELETE}" name='deleteButton' ><i class="fa fa-trash"></i></button>
         </div>    
@@ -50,7 +50,7 @@ updateItemsCount(list);
 function checkTodo(e) { 
   let item = e.target.parentNode;
   let done = item.classList.toggle('done');
-  item.querySelector('#checkbox').className = (!done) ? "fa fa-square" : "fa fa-check-square";  
+  item.querySelector('#checkbox').className = (!done) ? "fa fa-square-o" : "fa fa-check-square-o";  
 }
 
 //deletes the item
